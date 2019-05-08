@@ -1,0 +1,92 @@
+class QTThreadFunctor: ThreadFunctor
+{
+	
+}
+
+class GuiThreadFunctor: ThreadFunctor
+{
+	
+}
+
+class ControllerThreadFunctor: ThreadFunctor
+{
+	
+}
+
+class GameThreadFunctor: ThreadFunctor
+{
+	
+}
+
+class CommunicationThreadFunctor: ThreadFunctor
+{
+	virtual run();
+}
+
+
+
+
+// IMPLEMENTATION OF COMMUNICATION
+
+CommunicationThreadFunctor::ReceieveI2CMsg(){
+	
+}
+
+int initI2C(char[] filePath){
+	
+}
+
+int tal = rand() % 
+
+msgHandler(id, msg){
+
+switch(GAMEMODE){
+	case IDLE_MODE:
+	{
+		switch(id){
+			case PLAYER_1_BUTTON:
+			{
+				players = 1;
+				GAMEMODE = MAP_SELECT
+				GuiMsgQueue->send(SHOW_MAP_MENU);
+			}
+		}
+	}
+
+	case GAME_ON:
+	{
+		switch(id){
+			case FIRE:
+			{
+
+			}
+		}
+	}
+
+	case MAP_SELECT:
+	{
+		switch(id){
+			case FIRE:
+			{
+				selectCurrentMap();
+			}
+
+			case UP:
+			{
+				currentMap--;
+				
+			}
+		}
+	}
+}	
+}
+
+//GUI THREAD
+msgHandler(id msg){
+	switch(id){
+		case SHOW_MAP_MENU:
+		{
+			mapWindow->show();
+		}
+	}
+}
