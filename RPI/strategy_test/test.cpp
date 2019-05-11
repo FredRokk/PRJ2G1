@@ -9,6 +9,6 @@ int main(){
 
 	for(;;){
 		sleep(2);
-		m.up();
+		m.next();
 	}
 }

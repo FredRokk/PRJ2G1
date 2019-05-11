@@ -15,15 +15,6 @@ void Machine::next(){
 	state->next();
 }
 
-void Machine::singlePlayer(){
-	state->singlePlayer();
-}
-
-void Machine::multiPlayer(){
-	state->multiPlayer();
-}
-
-
 void State::next(){
 	cout << "Default next called" << endl;
 }
