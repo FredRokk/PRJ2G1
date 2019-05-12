@@ -1,7 +1,7 @@
-SRCS=readCSVtest.cpp
+SRCS=CSVtest.cpp
 OBJS=$(SRCS:.cpp=.o)
 DEPS=$(SRCS:.cpp=.d)
-EXE=readCSVtest
+EXE=CSVtest
 BASEPATH=..
 # Determine whether this is a debug build or not
 ifeq (${TARGET},target)

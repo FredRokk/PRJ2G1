@@ -45,6 +45,15 @@ int main(){
 
 	cout << "Count is " << count << endl;
 
+	int size = scores.size();
+
+	ofstream of;
+	of.open("dataCopy.csv");
+	for (int i = 0; i < size; i++){
+		of << scores[i].name << "," << scores[i].points << "," << scores[i].time << endl;
+	}
+
+	cout << "Done copying to dataCopy.csv" << endl;
 	/*
 	for (int i = 0; i < count; i++){
 		if (i < 100 || i > 2000)
