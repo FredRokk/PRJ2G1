@@ -19,7 +19,7 @@ using namespace std;
 	};
 
 int main(){
-	ifstream ip("data.csv");
+	ifstream ip("dataCopy.csv");
 
 	if(!ip.is_open()) cout << "File already open" << endl;
 
@@ -49,22 +49,11 @@ int main(){
 
 	ofstream of;
 	of.open("dataCopy.csv");
-	for (int i = 0; i < size; i++){
+	for (int i = 0; i < size-1; i++){
 		of << scores[i].name << "," << scores[i].points << "," << scores[i].time << endl;
 	}
-
+	of << scores[size].name << "," << scores[size].points << "," << scores[size].time;
+	
 	cout << "Done copying to dataCopy.csv" << endl;
-	/*
-	for (int i = 0; i < count; i++){
-		if (i < 100 || i > 2000)
-		{
-		cout << "Output nr. " << i << endl;
-		scores[i].printScore();
-		} else if (i % 100 == 0){
-			cout << "Output nr. " << i << endl;
-			scores[i].printScore();
-		}
-	} */
-
 
 }
