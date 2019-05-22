@@ -1,7 +1,7 @@
-SRCS=GameThreadFunctor.cpp State.cpp Idle.cpp MapSelect.cpp Practice.cpp Versus.cpp Results.cpp PlayerOneHighscore.cpp PlayerTwoHighscore.cpp test.cpp
+SRCS=Map.cpp Gamerules.cpp gameRulesTest.cpp
 OBJS=$(SRCS:.cpp=.o)
 DEPS=$(SRCS:.cpp=.d)
-EXE=test
+EXE=gamerulesTest
 BASEPATH=..
 # Determine whether this is a debug build or not
 ifeq (${TARGET},target)
