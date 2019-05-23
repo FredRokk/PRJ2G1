@@ -22,6 +22,8 @@ endif
 # Setup the CFLAGS to ensure that the relevant warnings, includes and defines.
 CFLAGS+= -Wall -D_REENTRANT -DOS_LINUX -I$(BASEPATH)/inc
 
+all: $(EXE)
+
 %.d: %.cpp
 	$(CXX) -MT$(@:.d=.o) -MM $(CXXFLAGS) $< > $@
 
@@ -31,7 +33,13 @@ CFLAGS+= -Wall -D_REENTRANT -DOS_LINUX -I$(BASEPATH)/inc
 $(EXE): $(OBJS) $(DEPS)
 	$(CXX) -o $@ $(OBJS) -L$(LIBPATH) -lOSApi -lrt -lpthread
 
-all: $(EXE)
-
+.PHONY: clean
 clean:
-	rm -f $(OBJS) $(EXE) $(DEPS)
+	@echo "Cleaning up..."
+	@rm -f $(OBJS) $(EXE) $(DEPS)
+
+ifneq ($(MAKECMDGOALS),clean)
+
+-include $(DEPS)
+
+endif

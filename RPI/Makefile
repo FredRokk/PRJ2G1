@@ -75,7 +75,7 @@ nuke:
 
 .PHONY: clean
 clean:
-	@echo "Cleaning up"
+	@echo "Cleaning up..."
 	@rm -f $(OBJS) $(EXE) $(DEPS)
 
 ifneq ($(MAKECMDGOALS),clean)
