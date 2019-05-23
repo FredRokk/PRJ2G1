@@ -33,10 +33,10 @@ void State::twoPlayer(){
 void State::back(){
 	std::cout << "Default: back" << std::endl;
 	if(returning_){
-		std::cout << "MapSelect: return - returning is true, setting returning to false" << std::endl;
+		std::cout << "Default: back - returning is true, setting returning to false" << std::endl;
 		returning_ = false;
 	} else {
-		std::cout << "Mapselect: return - setting return to true" << std::endl;
+		std::cout << "Default: back - setting return to true" << std::endl;
 		returning_ = true;
 	}
 }
