@@ -3,21 +3,23 @@
 
 #include <osapi/ThreadFunctor.hpp>
 #include <osapi/Thread.hpp>
-#include <osapi/MessageQueue.hpp>
+#include <osapi/MsgQueue.hpp>
+#include <osapi/Message.hpp>
 
-#include "threadFunctors/PrintThreadFunctor"
+#include "communication/Messages.hpp"
+#include "threadFunctors/PrintThreadFunctor.hpp"
 
 class GUIThreadFunctor: public osapi::ThreadFunctor
 {
-private:
-	osapi::MessageQueue* printMq_;
-	osapi::MessageQueue* gameMq_;
-
-	void spawnPrintThread();
 public: 
-	GUIThreadFunctor(osapi::MessageQueue* printMq, osapi::MessageQueue* gameMq);
+	GUIThreadFunctor(osapi::MsgQueue* printMq, osapi::MsgQueue* gameMq);
 protected:
 	virtual void run();
+private:
+	osapi::MsgQueue* printMq_;
+	osapi::MsgQueue* gameMq_;
+
+	void init();
 };
 
 #endif

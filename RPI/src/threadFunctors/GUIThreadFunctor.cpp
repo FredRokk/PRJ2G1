@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include "threadFunctors/GUIThreadFunctor.hpp"
+
+/*////////////////////////////////////////////////////////////
+////////////   			Public Methods			//////////////
+*/////////////////////////////////////////////////////////////
+
+GUIThreadFunctor::GUIThreadFunctor(	osapi::MsgQueue* printMq, 
+									osapi::MsgQueue* gameMq)
+{
+	printMq_ = printMq;
+	gameMq_ = gameMq;
+}
+
+/*////////////////////////////////////////////////////////////
+////////////   			Protected Methods		//////////////
+*/////////////////////////////////////////////////////////////
+
+void GUIThreadFunctor::run(){
+	init();
+
+	PrintThreadFunctor printTF(printMq_, gameMq_);
+	osapi::Thread printThread(&printTF);
+	printThread.start();
+
+	//a.exec()
+	printThread.join();
+
+}
+
+/*////////////////////////////////////////////////////////////
+////////////   			Private Methods			//////////////
+*/////////////////////////////////////////////////////////////
+
+void GUIThreadFunctor::init(){
+	//Initialize UART and I2C here
+	std::cout << "GUIThreadFunctor::init()" << std::endl;
+}

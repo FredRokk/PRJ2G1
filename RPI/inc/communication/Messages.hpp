@@ -57,7 +57,7 @@ struct CommI2CHitCfm: public osapi::Message
 */////////////////////////////////////////////////////////////
 
 //GameThread to CommThread when system wants to send a char over UART (Versus and Practice)
-struct GameUARTCommand: public osapi::Message
+struct GameUARTCommandInd: public osapi::Message
 {
 	char command;
 };
@@ -81,7 +81,7 @@ struct GameShowMenuInd: public osapi::Message
 };
 
 //GameThread to PrintThread when GameThread wishes to clean up a menu (All states)
-struct GameCleanWindowInd: public osapi::Message
+struct GameCleanMenuInd: public osapi::Message
 {
 	std::string menu;
 };
