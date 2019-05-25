@@ -50,3 +50,32 @@ void State::hit(int field){
 void State::miss(){
 	std::cout << "Default: miss" << std::endl;
 }
+
+void State::sendShowInd(osapi::MsgQueue* mq, std::string menu){
+	GameShowMenuInd* showMsg = new GameShowMenuInd();
+	showMsg->menu = menu;
+	mq->send(ID_GAME_SHOW_MENU_IND, showMsg);
+}
+
+void State::sendCleanInd(osapi::MsgQueue* mq, std::string menu){
+	GameCleanMenuInd* cleanMsg = new GameCleanMenuInd();
+	cleanMsg->menu = menu;
+	mq->send(ID_GAME_CLEAN_MENU_IND, cleanMsg);
+}
+
+void State::sendMapInd(osapi::MsgQueue* mq, std::string map){
+	GameI2CSendMapInd* mapMsg = new GameI2CSendMapInd();
+	mapMsg->map = map;
+	mq->send(ID_GAME_I2C_SEND_MAP_IND, mapMsg);
+}
+
+void State::sendUARTCommandInd(osapi::MsgQueue* mq, char command){
+	GameUARTCommandInd* commandMsg = new GameUARTCommandInd();
+	commandMsg->command = command;
+	mq->send(ID_GAME_UART_COMMAND_IND, commandMsg);
+}
+
+void State::sendHitReq(osapi::MsgQueue* mq){
+	GameI2CGetHitReq* hitMsg = new GameI2CGetHitReq();
+	mq->send(ID_GAME_I2C_GET_HIT_REQ, hitMsg);
+}

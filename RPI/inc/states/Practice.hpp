@@ -4,6 +4,9 @@
 #include "states/State.hpp"
 #include "states/Idle.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
+#include "communication/Messages.hpp"
+#include "gameSpecifics/Gamerules"
+#include "gameSpecifics/Map"
 
 class Practice: public State
 {
@@ -15,7 +18,7 @@ public:
 
 private:
 	int selectedMap_;
-	//Map map
+	Map map_;
 };
 
 #endif

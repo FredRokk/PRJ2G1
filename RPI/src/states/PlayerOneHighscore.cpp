@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "states/PlayerOneHighscore.hpp"
+#include "communication/Messages.hpp"
 
 /* 
 class: PlayerOneHighscore

@@ -10,6 +10,12 @@ Implementation of the Versus State's member functions
 Versus::Versus(GameThreadFunctor* gameTF, int selectedMap){
 	selectedMap_ = selectedMap;
 	this->gameTF = gameTF;
+
+	menuName_ = "versus";
+	map_ = Gamerules::generateMap(selectedMap_);
+
+	sendMapInd(gameTF->getCommMq(), map_.getMapString());
+	sendShowInd(gameTF->getPrintMq(), menuName_);
 	std::cout << "Versus: ctor - fire to enter new state" << std::endl;
 }
 

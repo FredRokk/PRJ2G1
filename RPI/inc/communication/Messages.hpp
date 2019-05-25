@@ -100,11 +100,24 @@ struct GameUpdateShotsInd: public osapi::Message
 	int shots;
 };
 
-//GameThread to PrintThread when GameThread wishes to update which player is next to shoot (Versus state only)
+//GameThread to PrintThread when GameThread wishes to update which player is next (Versus state)
 struct GameSetNextPlayerInd: public osapi::Message
 {
 	int player;
 };
+
+//GameThread to PrintThread when GameThread wishes to notify player(s) that cannon is reengaged (Versus and Practice state)
+struct GameUpdateCanonArmedInd: public osapi::Message
+{
+	bool armed;
+	std::string menu;
+};
+
+//GameThread to PrintThread when Gamethread wishes to notify player(s) that they missed (Versus and Practice only)
+struct GameNotifyMissInd: public osapi::Message
+{
+	std::string menu;
+}
 
 //GameThread to PrintThread when GameThread wishes to update a char in player's name when posting highscore (Both highscore states)
 struct GameHighscoreChangeChar: public osapi::Message

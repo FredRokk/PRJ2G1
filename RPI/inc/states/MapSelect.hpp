@@ -5,6 +5,8 @@
 #include "states/Versus.hpp"
 #include "states/Practice.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
+#include "communication/Messages.hpp"
+#include "gameSpecifics/Gamerules"
 
 class MapSelect: public State
 {

@@ -8,6 +8,8 @@ Implementation of the Idle State's member functions
 
 Idle::Idle(GameThreadFunctor* gameTF){
 	this->gameTF = gameTF;
+	menuName_ = "idle1";
+
 	std::cout << "Idle: ctor - onePlayer or twoPlayer to enter new state" << std::endl;
 }
 
@@ -17,10 +19,18 @@ Idle::~Idle(){
 
 void Idle::left(){
 	std::cout << "Idle: left" << std:: endl;
+	currentIdle_--;
+	if(currentIdle_ < 1) currentIdle_ = NUMBER_OF_DEFAULT_MAPS + 1;
+	menuName_.at(5) = currentIdle_ + 48; //string.at int to character conversion
+	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Idle::right(){
 	std::cout << "Idle: right" << std:: endl;
+	currentIdle_++;
+	if(currentIdle_ > NUMBER_OF_DEFAULT_MAPS + 1) currentIdle_ = 1;
+	menuName_.at(5) = currentIdle_ + 48; //string.at int to character conversion
+	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Idle::onePlayer(){

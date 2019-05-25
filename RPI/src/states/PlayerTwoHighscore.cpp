@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "states/PlayerTwoHighscore.hpp"
-
+#include "communication/Messages.hpp"
 /* 
 class: PlayerTwoHighscore
 Implementation of the PlayerTwoHighscore State's member functions

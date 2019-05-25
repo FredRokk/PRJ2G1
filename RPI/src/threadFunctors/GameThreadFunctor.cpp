@@ -64,14 +64,22 @@ void GameThreadFunctor::run()
 {
 	std::cout << "GameThreadFunctor::run()" << std::endl;
 
-	while(!(isPrintThreadReady_ && isCommThreadReady_)){
+	//Wait untill PrintThread and CommThread have sent their ready messages
+	while(!(isPrintThreadReady_ && !isCommThreadReady_)){
 		unsigned long id;
 		osapi::Message* msg = gameMq_->receive(id);
 		readyHandler(id, msg);
 		delete(msg);
 	}
 
+	//Show idle1 menu after threads are ready
+	GameShowMenuInd* showMsg = new GameShowMenuInd();
+	showMsg->menu = "idle1";
+	printMq_->send(ID_GAME_SHOW_MENU_IND, showMsg);
+
 	std::cout << "GameThreadFunctor: PrintThread and CommThread ready" << std::endl;
+	
+	//Run event loop
 	for(;;){
 		unsigned long id;
 		osapi::Message* msg = gameMq_->receive(id);

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "states/Results.hpp"
+#include "communication/Messages.hpp"
 
 /* 
 class: Results

@@ -79,19 +79,25 @@ void PrintThreadFunctor::msgHandler(int id, osapi::Message* msg){
 
 void PrintThreadFunctor::handleIdGameShowMenuInd(GameShowMenuInd* msg){
 	//Get menu string from msg and show the menu corresponding to the string
+	std::cout << "Showing menu: " << msg->menu << std::endl;
 }
 void PrintThreadFunctor::handleIdGameCleanMenuInd(GameCleanMenuInd* msg){
 	//Get menu string from msg and clean the menu corresponding to the string
+	std::cout << "Cleaning menu: " << msg->menu << std::endl;
 }
 void PrintThreadFunctor::handleIdGameUpdatePointsInd(GameUpdatePointsInd* msg){
-	//Get player int and points ind and update the points of the player in all point-containing menus
+	//Get player int and points int and update the points of the player in all point-containing menus
+	std::cout << "Updating player " << msg->player << "'s points to " << msg->points << std::endl;
 }
 void PrintThreadFunctor::handleIdGameUpdateShotsInd(GameUpdateShotsInd* msg){
-	//Get player int and shots ind and update the shots of the player in Versus menu
+	//Get player int and shots int and update the shots of the player in Versus menu
+	std::cout << "Updating player " << msg->player << "'s shots to " << msg->shots << std::endl;
 }
 void PrintThreadFunctor::handleIdGameSetNextPlayerInd(GameSetNextPlayerInd* msg){
 	//Get player int and update the next player to shoot in Versus menu
+	std::cout << "Setting next player to player " << msg->player << std::endl;
 }
 void PrintThreadFunctor::handleIdGameHighscoreChangeChar(GameHighscoreChangeChar* msg){
 	//Get player int, charNum int and newChar char and update the charNum to newChar in corresponding player's highscore window
+	std::cout << "Changing player " << msg->player << "'s char number " << msg->charNum << " to " << msg->newChar << std::endl;
 }

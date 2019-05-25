@@ -10,6 +10,13 @@ Implementation of the Practice State's member functions
 Practice::Practice(GameThreadFunctor* gameTF, int selectedMap){
 	selectedMap_ = selectedMap;
 	this->gameTF = gameTF;
+
+	menuName_ = "practice";
+	map_ = Gamerules::generateMap(selectedMap_);
+
+	sendMapInd(gameTF->getCommMq(), map_.getMapString());
+	sendShowInd(gameTF->getPrintMq(), menuName_);
+
 	std::cout << "Practice: ctor - fire to enter new state" << std::endl;
 }
 
@@ -24,10 +31,16 @@ void Practice::fire(){
 		delete this;
 	}
 	else {
+		sendHitReq(gameTf->getCommMq());
+
 		std::cout << "Practice: fire" << std::endl;
 	}
 }
 
 void Practice::hit(int field){
+	if (field = 0){
+		sendShowInd(gameTF->getPrintMq(), "miss");
+		sendUARTCommandInd(gameTF->getCommMq(), '+');
+	}
 	std::cout << "Practice: hit" << std::endl;
 }
