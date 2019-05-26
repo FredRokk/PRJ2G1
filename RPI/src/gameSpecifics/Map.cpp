@@ -3,6 +3,10 @@
 
 #include <iostream>
 
+Map::Map(){
+	map_ = "0000000000";
+}
+
 std::string Map::getMapString(){
 	return map_;
 }

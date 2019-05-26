@@ -6,6 +6,7 @@
 class Map
 {
 public:
+	Map();
 	Map(const std::string & map): map_(map) {};
 	std::string getMapString();
 	int getField(unsigned int field);

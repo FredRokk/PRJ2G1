@@ -25,10 +25,19 @@ protected:
 	bool returning_ = false;
 	std::string menuName_;
 
-	void sendShowMsg(osapi::MsgQueue* mq, std::string menu);
-	void sendCleanMsg(osapi::MsgQueue* mq, std::string menu);
-	void sendMapMsg(osapi::MsgQueue* mq, std::string map);
-	void sendHitRequest(osapi::MsgQueue* mq);
+	void sendUARTCommandInd(osapi::MsgQueue* mq, char command);
+	void sendMapInd(osapi::MsgQueue* mq, std::string map);
+	void sendHitReq(osapi::MsgQueue* mq);
+	void sendShowInd(osapi::MsgQueue* mq, std::string menu);
+	void sendCleanInd(osapi::MsgQueue* mq, std::string menu);
+	void sendChangeMapInd(osapi::MsgQueue* mq, int map);
+	void sendPointsInd(osapi::MsgQueue* mq, int player, int points);
+	void sendShotsInd(osapi::MsgQueue* mq, int player, int shots);
+	void sendNextPlayerInd(osapi::MsgQueue* mq, int player);
+	void sendArmedInd(osapi::MsgQueue* mq, bool armed, std::string menu);
+	void sendMissInd(osapi::MsgQueue* mq, std::string menu);
+	void sendHighscoreChangeCharInd(osapi::MsgQueue*, int player, int charNum, char newChar);
+
 };
 
 #endif

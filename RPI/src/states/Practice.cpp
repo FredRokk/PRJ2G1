@@ -31,15 +31,15 @@ void Practice::fire(){
 		delete this;
 	}
 	else {
-		sendHitReq(gameTf->getCommMq());
+		sendHitReq(gameTF->getCommMq());
 
 		std::cout << "Practice: fire" << std::endl;
 	}
 }
 
 void Practice::hit(int field){
-	if (field = 0){
-		sendShowInd(gameTF->getPrintMq(), "miss");
+	if (field == 0){
+		sendMissInd(gameTF->getPrintMq(), menuName_);
 		sendUARTCommandInd(gameTF->getCommMq(), '+');
 	}
 	std::cout << "Practice: hit" << std::endl;

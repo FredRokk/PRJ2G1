@@ -18,6 +18,7 @@ public:
 	void twoPlayer();
 private:
 	int currentIdle_ = 1;
+	void changeIdle(bool increasing);
 };
 
 #endif

@@ -14,9 +14,12 @@ enum {
 	ID_GAME_I2C_GET_HIT_REQ,
 	ID_GAME_SHOW_MENU_IND,
 	ID_GAME_CLEAN_MENU_IND,
+	ID_GAME_CHANGE_MAP_IND,
 	ID_GAME_UPDATE_POINTS_IND,
 	ID_GAME_UPDATE_SHOTS_IND,
 	ID_GAME_SET_NEXT_PLAYER_IND,
+	ID_GAME_UPDATE_CANON_ARMED_IND,
+	ID_GAME_NOTIFY_MISS_IND,
 	ID_GAME_HIGHSCORE_CHANGE_CHAR_IND,
 };
 
@@ -86,6 +89,12 @@ struct GameCleanMenuInd: public osapi::Message
 	std::string menu;
 };
 
+//GameThread to PrintThread when GameThread wishes to display a different map selection (MapSelect)
+struct GameChangeMapInd: public osapi::Message
+{
+	int map;
+};
+
 //GameThread to PrintThread when GameThread wishes to update points for a player (Versus state only)
 struct GameUpdatePointsInd: public osapi::Message
 {
@@ -117,7 +126,7 @@ struct GameUpdateCanonArmedInd: public osapi::Message
 struct GameNotifyMissInd: public osapi::Message
 {
 	std::string menu;
-}
+};
 
 //GameThread to PrintThread when GameThread wishes to update a char in player's name when posting highscore (Both highscore states)
 struct GameHighscoreChangeChar: public osapi::Message

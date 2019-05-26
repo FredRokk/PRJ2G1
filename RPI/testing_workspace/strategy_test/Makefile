@@ -2,7 +2,7 @@ SRCS=test.cpp Classes.cpp
 OBJS=$(SRCS:.cpp=.o)
 DEPS=$(SRCS:.cpp=.d)
 EXE=test
-BASEPATH=..
+BASEPATH=../..
 # Determine whether this is a debug build or not
 ifeq (${TARGET},target)
 CXX=arm-rpizw-g++

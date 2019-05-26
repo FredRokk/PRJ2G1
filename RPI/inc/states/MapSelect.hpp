@@ -2,11 +2,12 @@
 #define MAP_SELECT
 
 #include "states/State.hpp"
+#include "states/Idle.hpp"
 #include "states/Versus.hpp"
 #include "states/Practice.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
 #include "communication/Messages.hpp"
-#include "gameSpecifics/Gamerules"
+#include "gameSpecifics/Gamerules.hpp"
 
 class MapSelect: public State
 {
@@ -20,6 +21,7 @@ public:
 private:
 	bool multiplayer_;
 	int currentMap_ = 1;
+	void changeMap(bool increase);
 };
 
 #endif

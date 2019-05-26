@@ -19,16 +19,14 @@ Idle::~Idle(){
 
 void Idle::left(){
 	std::cout << "Idle: left" << std:: endl;
-	currentIdle_--;
-	if(currentIdle_ < 1) currentIdle_ = NUMBER_OF_DEFAULT_MAPS + 1;
+	changeIdle(false);
 	menuName_.at(5) = currentIdle_ + 48; //string.at int to character conversion
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Idle::right(){
 	std::cout << "Idle: right" << std:: endl;
-	currentIdle_++;
-	if(currentIdle_ > NUMBER_OF_DEFAULT_MAPS + 1) currentIdle_ = 1;
+	changeIdle(true);
 	menuName_.at(5) = currentIdle_ + 48; //string.at int to character conversion
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
@@ -43,4 +41,15 @@ void Idle::twoPlayer(){
 	std::cout << "Idle: twoPlayer, entering MapSelect with players = 2" << std::endl;
 	gameTF->setCurrent(new MapSelect(this->gameTF, true));
 	delete this;
+}
+
+void Idle::changeIdle(bool increase){
+	if(increase){
+		currentIdle_++;
+	} else {
+		currentIdle_--;
+	}
+
+	if (currentIdle_ < 1) currentIdle_ = NUMBER_OF_DEFAULT_MAPS + 1;
+	else if (currentIdle_ > NUMBER_OF_DEFAULT_MAPS + 1) currentIdle_ = 1;
 }

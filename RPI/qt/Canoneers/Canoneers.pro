@@ -29,18 +29,21 @@ SOURCES += \
     mapselect.cpp \
     practice.cpp \
     versus.cpp \
-    results.cpp
+    results.cpp \
+    playeronehighscore.cpp
 
 HEADERS += \
     idle.h \
     mapselect.h \
     practice.h \
     versus.h \
-    results.h
+    results.h \
+    playeronehighscore.h
 
 FORMS += \
     idle.ui \
     mapselect.ui \
     practice.ui \
     versus.ui \
-    results.ui
+    results.ui \
+    playeronehighscore.ui

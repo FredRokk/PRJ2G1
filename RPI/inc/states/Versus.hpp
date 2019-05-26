@@ -5,6 +5,9 @@
 #include "states/Idle.hpp"
 #include "states/Results.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
+#include "communication/Messages.hpp"
+#include "gameSpecifics/Gamerules.hpp"
+#include "gameSpecifics/Map.hpp"
 
 class Versus: public State
 {
@@ -20,10 +23,12 @@ public:
 
 private:
 	int selectedMap_;
-	//Map map
-	int playerOnePoints_ = 0;
-	int playerTwoPoints_ = 0;
-	int totalShots = 0;
+	Map map_;
+	int player1Points_ = 0;
+	int player2Points_ = 0;
+	int player1Shots_;
+	int player2Shots_;
+	int currentPlayer_ = 1;
 	int maxShots; //INITIALIZE THIS in CTOR TO SOMETHING IN GameRules
 };
 

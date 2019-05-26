@@ -2,7 +2,6 @@
 #define GAMERULES
 
 #include <string>
-#include <vector>
 #include "gameSpecifics/Map.hpp"
 
 #define NUMBER_OF_VERSUS_SHOTS 8

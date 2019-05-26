@@ -5,8 +5,8 @@
 #include "states/Idle.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
 #include "communication/Messages.hpp"
-#include "gameSpecifics/Gamerules"
-#include "gameSpecifics/Map"
+#include "gameSpecifics/Gamerules.hpp"
+#include "gameSpecifics/Map.hpp"
 
 class Practice: public State
 {

@@ -10,8 +10,9 @@ Implementation of the MapSelect State's member functions
 MapSelect::MapSelect(GameThreadFunctor* gameTF, bool multiplayer){
 	multiplayer_ = multiplayer;
 	this->gameTF = gameTF;
-	menuName_ = "mapSelect1";
+	menuName_ = "mapSelect";
 
+	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 
 	std::cout << "MapSelect: ctor - fire to enter new state" << std::endl;
@@ -23,19 +24,14 @@ MapSelect::~MapSelect(){
 
 void MapSelect::up(){
 	std::cout << "MapSelect: up" << std::endl;
-	currentMap_++;
-	if (currentMap_ > NUMBER_OF_DEFAULT_MAPS + 1) currentMap_ = 1;
-	menuName_.at(11) = currentMap_ + 48; //string.at int to character conversion
-	sendShowInd(gameTF->getPrintMq(), menuName_);
+	changeMap(false);
+	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 }
 
 void MapSelect::down(){
 	std::cout << "MapSelect: down" << std::endl;
-	currentMap_--;
-	if (currentMap_ < 1) currentMap_ = NUMBER_OF_DEFAULT_MAPS + 1;
-	menuName_.at(11) = currentMap_ + 48; //string.at int to character conversion
-	sendShowInd(gameTF->getPrintMq(), menuName_);
-
+	changeMap(true);
+	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 }
 
 void MapSelect::fire(){
@@ -53,4 +49,15 @@ void MapSelect::fire(){
 		gameTF->setCurrent(new Practice(this->gameTF, currentMap_));
 		delete this;
 	}
+}
+
+void MapSelect::changeMap(bool increase){
+	if(increase){
+		currentMap_++;
+	} else {
+		currentMap_--;
+	}
+
+	if (currentMap_ < 1) currentMap_ = NUMBER_OF_DEFAULT_MAPS + 1;
+	else if (currentMap_ > NUMBER_OF_DEFAULT_MAPS + 1) currentMap_ = 1;
 }
