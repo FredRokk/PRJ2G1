@@ -24,12 +24,11 @@ public:
 private:
 	int selectedMap_;
 	Map map_;
-	int player1Points_ = 0;
-	int player2Points_ = 0;
-	int player1Shots_;
-	int player2Shots_;
+	int playerOnePoints_ = 0;
+	int playerTwoPoints_ = 0;
+	int playerOneShots_;
+	int playerTwoShots_;
 	int currentPlayer_ = 1;
-	int maxShots; //INITIALIZE THIS in CTOR TO SOMETHING IN GameRules
 };
 
 #endif

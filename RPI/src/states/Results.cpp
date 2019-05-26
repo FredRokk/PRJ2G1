@@ -10,15 +10,21 @@ Implementation of the Results State's member functions
 
 Results::Results(GameThreadFunctor* gameTF, int selectedMap, int playerOnePoints, int playerTwoPoints){
 	selectedMap_ = selectedMap;
+	this->gameTF = gameTF;
 	playerOnePoints_ = playerOnePoints;
 	playerTwoPoints_ = playerTwoPoints;
-	this->gameTF = gameTF;
-	//Init score to beat here
+
+	menuName_ = "results";
+
+	sendShowInd(gameTF->getPrintMq(), menuName_);
+
+	scoreToBeat_ = 400; //Should be initialized through Gamerules::getScoreToBeat(selectedMap_);
 	std::cout << "Results: ctor - fire to enter new state" << std::endl;
 }
 
 Results::~Results(){
 	std::cout << "Results: dtor" << std::endl;
+	sendCleanInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Results::fire(){

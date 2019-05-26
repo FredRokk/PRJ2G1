@@ -5,6 +5,7 @@
 #include "states/Idle.hpp"
 #include "states/PlayerTwoHighscore.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
+#include "communication/Messages.hpp"
 
 class PlayerOneHighscore: public State
 {
@@ -16,11 +17,16 @@ public:
 	void down();
 
 private:
-	std::string name;
+	std::string name_ = "AAA";
 	int selectedMap_;
 	int playerOnePoints_;
 	int playerTwoPoints_;
-	int currentChar = 0;
+	int currentChar_ = 0;
+	int currentCharIndex_ = 0;
+	std::string charList_ = "ABCDEFGIHJKLMNOPQRSTUVWXYZ1234567890";
+
+	void cycleCurrentCharIndex(bool increase);
+	char getCharFromList(int index);
 };
 
 #endif

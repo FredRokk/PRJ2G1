@@ -10,8 +10,8 @@ Implementation of the Versus State's member functions
 Versus::Versus(GameThreadFunctor* gameTF, int selectedMap){
 	selectedMap_ = selectedMap;
 	this->gameTF = gameTF;
-	player1Shots_ = NUMBER_OF_VERSUS_SHOTS/2;
-	player2Shots_ = NUMBER_OF_VERSUS_SHOTS/2;
+	playerOneShots_ = NUMBER_OF_VERSUS_SHOTS/2;
+	playerTwoShots_ = NUMBER_OF_VERSUS_SHOTS/2;
 
 	menuName_ = "versus";
 	map_ = Gamerules::generateMap(selectedMap_);
@@ -69,17 +69,17 @@ void Versus::hit(int field){
 
 	if(currentPlayer_ == 1){
 		//Player 1 was the shooter
-		player1Points_ += pointsGained;
-		sendPointsInd(gameTF->getPrintMq(), currentPlayer_, player1Points_);
-		player1Shots_--;
-		sendShotsInd(gameTF->getPrintMq(), currentPlayer_, player1Shots_);
+		playerOnePoints_ += pointsGained;
+		sendPointsInd(gameTF->getPrintMq(), currentPlayer_, playerOnePoints_);
+		playerOneShots_--;
+		sendShotsInd(gameTF->getPrintMq(), currentPlayer_, playerOneShots_);
 		currentPlayer_ = 2;
 	} else {
 		//Player 2 was the shooter
-		player2Points_ += pointsGained;
-		sendPointsInd(gameTF->getPrintMq(), currentPlayer_, player2Points_);
-		player2Shots_--;
-		sendShotsInd(gameTF->getPrintMq(), currentPlayer_, player2Shots_);
+		playerTwoPoints_ += pointsGained;
+		sendPointsInd(gameTF->getPrintMq(), currentPlayer_, playerTwoPoints_);
+		playerTwoShots_--;
+		sendShotsInd(gameTF->getPrintMq(), currentPlayer_, playerTwoShots_);
 		currentPlayer_ = 1;
 	}
 
@@ -88,9 +88,9 @@ void Versus::hit(int field){
 	*/
 
 
-	if (player2Shots_ == 0){		
+	if (playerTwoShots_ == 0){		
 		sleep(3);
-		gameTF->setCurrent(new Results(this->gameTF, selectedMap_, player1Points_, player2Points_));
+		gameTF->setCurrent(new Results(this->gameTF, selectedMap_, playerOnePoints_, playerTwoPoints_));
 		delete this;
 		//End game stuff
 	} else {

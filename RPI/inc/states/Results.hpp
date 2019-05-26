@@ -6,6 +6,8 @@
 #include "states/PlayerOneHighscore.hpp"
 #include "states/PlayerTwoHighscore.hpp"
 #include "threadFunctors/GameThreadFunctor.hpp"
+#include "communication/Messages.hpp"
+#include "gameSpecifics/Gamerules.hpp"
 
 class Results: public State
 {
