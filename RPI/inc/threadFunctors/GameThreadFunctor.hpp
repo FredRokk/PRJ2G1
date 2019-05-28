@@ -20,7 +20,6 @@ public:
 	osapi::MsgQueue* getGameMq();
 	osapi::MsgQueue* getCommMq();
 	osapi::MsgQueue* getPrintMq();
-	void takeCommand();
 protected:
 	virtual void run();
 private:

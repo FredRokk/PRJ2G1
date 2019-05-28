@@ -30,7 +30,8 @@ SOURCES += \
     practice.cpp \
     versus.cpp \
     results.cpp \
-    playeronehighscore.cpp
+    playeronehighscore.cpp \
+    playertwohighscore.cpp
 
 HEADERS += \
     idle.h \
@@ -38,7 +39,8 @@ HEADERS += \
     practice.h \
     versus.h \
     results.h \
-    playeronehighscore.h
+    playeronehighscore.h \
+    playertwohighscore.h
 
 FORMS += \
     idle.ui \
@@ -46,4 +48,5 @@ FORMS += \
     practice.ui \
     versus.ui \
     results.ui \
-    playeronehighscore.ui
+    playeronehighscore.ui \
+    playertwohighscore.ui

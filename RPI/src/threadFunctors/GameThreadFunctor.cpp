@@ -13,7 +13,6 @@ GameThreadFunctor::GameThreadFunctor(	osapi::MsgQueue* gameMq,
 	gameMq_ = gameMq;
 	commMq_ = commMq;
 	printMq_ = printMq;
-	state = new Idle(this);
 }
 
 void GameThreadFunctor::setCurrent(State* s){
@@ -32,40 +31,14 @@ osapi::MsgQueue* GameThreadFunctor::getPrintMq(){
 	return printMq_;
 }
 
-void GameThreadFunctor::takeCommand(){
-	//This method is for testing purposes only
-	std::string cmd;
-	std::cin >> cmd;
-
-	if (cmd == "up"){
-		state->up();
-	} else if (cmd == "down"){
-		state->down();
-	} else if (cmd == "left"){
-		state->left();
-	} else if (cmd == "right"){
-		state->right();
-	} else if (cmd == "onePlayer"){
-		state->onePlayer();
-	} else if (cmd == "twoPlayer"){
-		state->twoPlayer();
-	} else if (cmd == "fire"){
-		state->fire();
-	} else if (cmd == "back"){
-		state->back();
-	}
-}
-
 /*////////////////////////////////////////////////////////////
 ////////////   		  Protected Methods			//////////////
 */////////////////////////////////////////////////////////////
 
 void GameThreadFunctor::run()
 {
-	std::cout << "GameThreadFunctor::run()" << std::endl;
-
 	//Wait untill PrintThread and CommThread have sent their ready messages
-	while(!(isPrintThreadReady_ && !isCommThreadReady_)){
+	while(!(isPrintThreadReady_ && isCommThreadReady_)){
 		unsigned long id;
 		osapi::Message* msg = gameMq_->receive(id);
 		readyHandler(id, msg);
@@ -73,9 +46,7 @@ void GameThreadFunctor::run()
 	}
 
 	//Show idle1 menu after threads are ready
-	GameShowMenuInd* showMsg = new GameShowMenuInd();
-	showMsg->menu = "idle1";
-	printMq_->send(ID_GAME_SHOW_MENU_IND, showMsg);
+	state = new Idle(this);
 
 	std::cout << "GameThreadFunctor: PrintThread and CommThread ready" << std::endl;
 	
@@ -97,12 +68,10 @@ void GameThreadFunctor::readyHandler(int id, osapi::Message* msg){
 	switch(id){
 		case ID_PRINT_READY_IND:
 		{
-			std::cout << "Print Thread returned ready" << std::endl;
 			isPrintThreadReady_ = true;
 		} break;
 		case ID_COMM_READY_IND:
 		{
-			std::cout << "Comm Thread returned ready" << std::endl;
 			isCommThreadReady_ = true;
 		} break;
 		default:

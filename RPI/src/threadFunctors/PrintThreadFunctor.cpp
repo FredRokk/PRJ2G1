@@ -36,7 +36,6 @@ void PrintThreadFunctor::run(){
 
 void PrintThreadFunctor::init(){
 	//Initialize printy things here
-	std::cout << "PrintThreadFunctor::init()" << std::endl;
 	
 	//Then send ready message
 	PrintReadyInd* msg = new PrintReadyInd();

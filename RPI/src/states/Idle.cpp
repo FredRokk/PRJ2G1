@@ -9,36 +9,31 @@ Implementation of the Idle State's member functions
 Idle::Idle(GameThreadFunctor* gameTF){
 	this->gameTF = gameTF;
 	menuName_ = "idle1";
-
-	std::cout << "Idle: ctor - onePlayer or twoPlayer to enter new state" << std::endl;
+	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 
 Idle::~Idle(){
-	std::cout << "Idle: dtor" << std::endl;
+	sendCleanInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Idle::left(){
-	std::cout << "Idle: left" << std:: endl;
 	changeIdle(false);
-	menuName_.at(5) = currentIdle_ + 48; //string.at int to character conversion
+	menuName_.at(4) = currentIdle_ + 48; //string.at int to character conversion
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Idle::right(){
-	std::cout << "Idle: right" << std:: endl;
 	changeIdle(true);
-	menuName_.at(5) = currentIdle_ + 48; //string.at int to character conversion
+	menuName_.at(4) = currentIdle_ + 48; //string.at int to character conversion
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Idle::onePlayer(){
-	std::cout << "Idle: onePlayer, entering MapSelect with players = 1" << std::endl;
 	gameTF->setCurrent(new MapSelect(this->gameTF, false));
 	delete this;
 }
 
 void Idle::twoPlayer(){
-	std::cout << "Idle: twoPlayer, entering MapSelect with players = 2" << std::endl;
 	gameTF->setCurrent(new MapSelect(this->gameTF, true));
 	delete this;
 }

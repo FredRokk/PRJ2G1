@@ -18,12 +18,10 @@ Results::Results(GameThreadFunctor* gameTF, int selectedMap, int playerOnePoints
 
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 
-	scoreToBeat_ = 400; //Should be initialized through Gamerules::getScoreToBeat(selectedMap_);
-	std::cout << "Results: ctor - fire to enter new state" << std::endl;
+	scoreToBeat_ = 100; //Should be initialized through Gamerules::getScoreToBeat(selectedMap_);
 }
 
 Results::~Results(){
-	std::cout << "Results: dtor" << std::endl;
 	sendCleanInd(gameTF->getPrintMq(), menuName_);
 }
 
@@ -34,21 +32,16 @@ void Results::fire(){
 		delete this;
 	}
 	else {
-		std::cout << "Results: fire" << std::endl;
 		if (playerOnePoints_ > scoreToBeat_ && playerTwoPoints_ > scoreToBeat_){
-			std::cout << "Both players made a highscore, going to PlayerOneHighscore, sending playerTwoPoints along" << std::endl;
 			gameTF->setCurrent(new PlayerOneHighscore(gameTF, selectedMap_, playerOnePoints_, playerTwoPoints_));
 			delete this;
 		} else if (playerOnePoints_ > scoreToBeat_) {
-			std::cout << "Player one made a highscore, going to PlayerOneHighscore, sending 0 as playerTwoPoints" << std::endl;
 			gameTF->setCurrent(new PlayerOneHighscore(gameTF, selectedMap_, playerOnePoints_, 0));
 			delete this;
 		} else if (playerTwoPoints_ > scoreToBeat_) {
-			std::cout << "Player two made a highscore, going to PlayerTwoHighscore" << std::endl;
 			gameTF->setCurrent(new PlayerTwoHighscore(gameTF, selectedMap_, playerTwoPoints_));
 			delete this;
 		} else {
-			std::cout << "Noone made a highscore, returning to idle" << std::endl;
 			gameTF->setCurrent(new Idle(this->gameTF));
 			delete this;
 		}

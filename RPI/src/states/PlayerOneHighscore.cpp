@@ -16,25 +16,26 @@ PlayerOneHighscore::PlayerOneHighscore(GameThreadFunctor* gameTF, int selectedMa
 	menuName_ = "playeronehighscore";
 
 	sendShowInd(gameTF->getPrintMq(), menuName_);
-
-	std::cout << "PlayerOneHighscore: ctor - fire to enter new state" << std::endl;
 }
 
 PlayerOneHighscore::~PlayerOneHighscore(){
-	std::cout << "PlayerOneHighscore: dtor" << std::endl;
 	sendCleanInd(gameTF->getPrintMq(), menuName_);
 }
 
 void PlayerOneHighscore::fire(){
 	if (returning_) {
-		std::cout << "PlayerOneHighscore: fire - Returning was true, returning to Idle" << std::endl;
-		gameTF->setCurrent(new Idle(this->gameTF));
-		delete this;
+		if (playerTwoPoints_ > 0){
+			gameTF->setCurrent(new PlayerTwoHighscore(gameTF, selectedMap_, playerTwoPoints_));
+			delete this;
+		} else {
+			gameTF->setCurrent(new Idle(gameTF));
+			delete this;
+		}
 	} else if (currentChar_ < 2){
+		currentCharIndex_ = 0;
 		currentChar_++;
-		std::cout << "PlayerOneHighscore: fire - increasing char" << std::endl;
 	} else if (currentChar_ == 2){
-		std::cout << "PlayerOneHighscore: fire - last char reached, post highscore and go to either PlayerTwoHighscore or Idle" << std::endl;
+		std::cout << "Posting highscore with name: " << name_ << ", points = " << playerOnePoints_ << ", selectedMap_ = " << selectedMap_ << std::endl;
 		//Gamerules::PostHighscore(selectedMap_, name_, playerOnePoints);
 		if (playerTwoPoints_ > 0){
 			gameTF->setCurrent(new PlayerTwoHighscore(gameTF, selectedMap_, playerTwoPoints_));
@@ -47,7 +48,6 @@ void PlayerOneHighscore::fire(){
 }
 
 void PlayerOneHighscore::up(){
-	std::cout << "PlayeroneHighscore: up, cycle currentChar_ in string here" << std::endl;
 	cycleCurrentCharIndex(true);
 	char newChar = getCharFromList(currentCharIndex_);
 	name_.at(currentChar_) = newChar;
@@ -56,7 +56,6 @@ void PlayerOneHighscore::up(){
 }
 
 void PlayerOneHighscore::down(){
-	std::cout << "PlayeroneHighscore: down, cycle currentChar_ in string here" << std::endl;
 	cycleCurrentCharIndex(false);
 	char newChar = getCharFromList(currentCharIndex_);
 	name_.at(currentChar_) = newChar;
@@ -70,10 +69,10 @@ void PlayerOneHighscore::cycleCurrentCharIndex(bool increase){
 		currentCharIndex_--;
 	}
 
-	if (currentCharIndex_ > (int)charList_.length()){
+	if (currentCharIndex_ > (int)charList_.length()-1){
 		currentCharIndex_ = 0;
 	} else if (currentCharIndex_ < 0) {
-		currentCharIndex_ = charList_.length();
+		currentCharIndex_ = charList_.length()-1;
 	}
 }
 

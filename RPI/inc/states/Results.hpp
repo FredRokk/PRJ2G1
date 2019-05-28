@@ -20,7 +20,7 @@ private:
 	int selectedMap_;
 	int playerOnePoints_;
 	int playerTwoPoints_;
-	int scoreToBeat_ = 400; //should be initialized in constructor and gotten from Gamerules function.
+	int scoreToBeat_ = 100; //should be initialized in constructor and gotten from Gamerules function.
 };
 
 #endif

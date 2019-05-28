@@ -24,6 +24,10 @@ private:
 	void handleIdGameUARTCommandInd(GameUARTCommandInd* msg);
 	void handleIdGameI2CSendMapInd(GameI2CSendMapInd* msg);
 	void handleIdGameI2CGetHitReq(GameI2CGetHitReq* msg);
+	void handleIdTestUARTCommandInd(TestUARTCommandInd* msg);
+
+	void sendUARTCommandInd(char command);
+	void sendI2CHitCfm(int fieldHit);
 };
 
 #endif

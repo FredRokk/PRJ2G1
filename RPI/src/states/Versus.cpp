@@ -20,28 +20,22 @@ Versus::Versus(GameThreadFunctor* gameTF, int selectedMap){
 	sendUARTCommandInd(gameTF->getCommMq(), '+');
 	sendArmedInd(gameTF->getPrintMq(), true, menuName_);
 	sendShowInd(gameTF->getPrintMq(), menuName_);
-	std::cout << "Versus: ctor - fire to enter new state" << std::endl;
 }
 
 Versus::~Versus(){
-	std::cout << "Versus: dtor" << std::endl;
 	sendCleanInd(gameTF->getPrintMq(), menuName_);
 }
 
 void Versus::up(){
-	std::cout << "Versus: up" << std::endl;
 }
 
 void Versus::down(){
-	std::cout << "Versus: down" << std::endl;
 }
 
 void Versus::left(){
-	std::cout << "Versus: left" << std::endl;
 }
 
 void Versus::right(){
-	std::cout << "Versus: right" << std::endl;
 }
 
 void Versus::fire(){
@@ -56,8 +50,6 @@ void Versus::fire(){
 }
 
 void Versus::hit(int field){
-	std::cout << "Versus: hit" << std::endl;
-
 	int pointsGained = Gamerules::getPoints(map_, field);
 
 	if (pointsGained == 0){
@@ -82,11 +74,6 @@ void Versus::hit(int field){
 		sendShotsInd(gameTF->getPrintMq(), currentPlayer_, playerTwoShots_);
 		currentPlayer_ = 1;
 	}
-
-	/*
-		HUSK BESKED MED RETURN POPUP OG NOGET MED AT HEJSE/SÆNKE FLAG PÅ PSOC VED RETURN
-	*/
-
 
 	if (playerTwoShots_ == 0){		
 		sleep(3);

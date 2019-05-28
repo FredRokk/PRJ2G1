@@ -8,7 +8,6 @@ Implementation of the State interface's member functions
 */
 
 State::~State(){
-	std::cout << "Default: dtor" << std::endl;
 }
 
 void State::up(){
@@ -33,10 +32,10 @@ void State::twoPlayer(){
 void State::back(){
 	std::cout << "Default: back" << std::endl;
 	if(returning_){
-		std::cout << "MapSelect: return - returning is true, setting returning to false" << std::endl;
+		std::cout << "Default: back - Disengaging return" << std::endl;
 		returning_ = false;
 	} else {
-		std::cout << "Mapselect: return - setting return to true" << std::endl;
+		std::cout << "Default: back - Press fire to return to Idle, back to reengage current state" << std::endl;
 		returning_ = true;
 	}
 }

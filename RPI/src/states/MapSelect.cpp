@@ -14,22 +14,18 @@ MapSelect::MapSelect(GameThreadFunctor* gameTF, bool multiplayer){
 
 	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 	sendShowInd(gameTF->getPrintMq(), menuName_);
-
-	std::cout << "MapSelect: ctor - fire to enter new state" << std::endl;
 }
 
 MapSelect::~MapSelect(){
-	std::cout << "MapSelect: dtor" << std::endl;
+	sendCleanInd(gameTF->getPrintMq(), menuName_);
 }
 
 void MapSelect::up(){
-	std::cout << "MapSelect: up" << std::endl;
 	changeMap(false);
 	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 }
 
 void MapSelect::down(){
-	std::cout << "MapSelect: down" << std::endl;
 	changeMap(true);
 	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 }
@@ -41,11 +37,9 @@ void MapSelect::fire(){
 		delete this;
 	}
 	else if(multiplayer_){
-		std::cout << "MapSelect: fire - Entering versus with map: " << currentMap_ << std::endl;
 		gameTF->setCurrent(new Versus(this->gameTF, currentMap_));
 		delete this;
 	} else {
-		std::cout << "MapSelect: fire - Entering practice with map: " << currentMap_ << std::endl;
 		gameTF->setCurrent(new Practice(this->gameTF, currentMap_));
 		delete this;
 	}

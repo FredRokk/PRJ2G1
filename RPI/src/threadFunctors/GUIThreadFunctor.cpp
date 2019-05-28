@@ -34,6 +34,5 @@ void GUIThreadFunctor::run(){
 */////////////////////////////////////////////////////////////
 
 void GUIThreadFunctor::init(){
-	//Initialize UART and I2C here
-	std::cout << "GUIThreadFunctor::init()" << std::endl;
+	//Initialize GUI-things stuffs
 }

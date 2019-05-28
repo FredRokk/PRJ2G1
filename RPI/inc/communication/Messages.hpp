@@ -21,6 +21,7 @@ enum {
 	ID_GAME_UPDATE_CANON_ARMED_IND,
 	ID_GAME_NOTIFY_MISS_IND,
 	ID_GAME_HIGHSCORE_CHANGE_CHAR_IND,
+	ID_TEST_UART_COMMAND_IND,
 };
 
 /*////////////////////////////////////////////////////////////
@@ -134,6 +135,14 @@ struct GameHighscoreChangeChar: public osapi::Message
 	int player;
 	int charNum;
 	char newChar;
+};
+
+/*////////////////////////////////////////////////////////////
+////////////   Messages originating from Test	//////////////
+*/////////////////////////////////////////////////////////////
+
+struct TestUARTCommandInd: public osapi::Message{
+	char command;
 };
 
 #endif
