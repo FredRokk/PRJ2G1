@@ -42,11 +42,7 @@ CXXFLAGS+= -Wall -D_REENTRANT -DOS_LINUX -I$(INCPATH)
 
 VPATH=src src/threadFunctors src/states src/gameSpecifics
 
-all: info $(EXE)
-
-.PHONY: info
-info:
-	@echo "Compiling for '$(TARGET)' in '$(MODE)' mode..."
+all: $(EXE)
 
 $(OBJ_DEST_DIR)/%.o: %.cpp
 	@echo "Compiling for $<"
@@ -65,7 +61,7 @@ $(OBJ_DEST_DIR):
 	@mkdir -p $(OBJ_DEST_DIR)
 
 $(EXE): $(DEST_DIR) $(OBJ_DEST_DIR) $(DEPS) $(OBJS)
-	@echo "Linking $<"
+	@echo "Linking $@"
 	@$(CXX) -o $@ $(OBJS) -L$(LIBPATH) -lOSApi -lrt -lpthread
 
 .PHONY: nuke

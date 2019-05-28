@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <osapi/Utility.hpp>
 #include "threadFunctors/CommThreadFunctor.hpp"
 
 /*////////////////////////////////////////////////////////////
@@ -12,6 +13,7 @@ CommThreadFunctor::CommThreadFunctor(	osapi::MsgQueue* commMq,
 {
 	commMq_ = commMq;
 	gameMq_ = gameMq;
+	srand(time(nullptr));
 }
 
 /*////////////////////////////////////////////////////////////
@@ -77,8 +79,8 @@ void CommThreadFunctor::handleIdGameI2CSendMapInd(GameI2CSendMapInd* msg){
 
 void CommThreadFunctor::handleIdGameI2CGetHitReq(GameI2CGetHitReq* msg){
 	//for now just send some random field back, with 50% miss rate 
+	osapi::sleep(1);
 	std::cout << "CommThreadFunctor sends hitReq over I2C" << std::endl;
-	srand(time(nullptr));
 	int fieldHit = rand() % 9;
 	if (fieldHit > 9) fieldHit = 0;
 	std::cout << "I2C returns field hit: " << fieldHit << std::endl;

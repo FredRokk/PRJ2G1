@@ -12,6 +12,7 @@ MapSelect::MapSelect(GameThreadFunctor* gameTF, bool multiplayer){
 	this->gameTF = gameTF;
 	menuName_ = "mapSelect";
 
+	std::cout << "MapSelect::MapSelect(gameTF, multiplayer): multiplayer = " << multiplayer << std::endl;
 	sendChangeMapInd(gameTF->getPrintMq(), currentMap_);
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }

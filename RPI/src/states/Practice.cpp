@@ -15,6 +15,8 @@ Practice::Practice(GameThreadFunctor* gameTF, int selectedMap){
 	map_ = Gamerules::generateMap(selectedMap_);
 
 	sendMapInd(gameTF->getCommMq(), map_.getMapString());
+	sendUARTCommandInd(gameTF->getCommMq(), '+');
+	sendArmedInd(gameTF->getPrintMq(), true, menuName_);
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 

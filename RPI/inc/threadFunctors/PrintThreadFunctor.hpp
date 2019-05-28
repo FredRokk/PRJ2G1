@@ -22,11 +22,13 @@ private:
 	void msgHandler(int id, osapi::Message* msg);
 	void handleIdGameShowMenuInd(GameShowMenuInd* msg);
 	void handleIdGameCleanMenuInd(GameCleanMenuInd* msg);
+	void handleIdGameChangeMapInd(GameChangeMapInd* msg);
 	void handleIdGameUpdatePointsInd(GameUpdatePointsInd* msg);
 	void handleIdGameUpdateShotsInd(GameUpdateShotsInd* msg);
 	void handleIdGameSetNextPlayerInd(GameSetNextPlayerInd* msg);
+	void handleIdGameUpdateCanonArmedInd(GameUpdateCanonArmedInd* msg);
+	void handleIdGameNotifyMissInd(GameNotifyMissInd* msg);
 	void handleIdGameHighscoreChangeChar(GameHighscoreChangeChar* msg);
-
 };
 
 #endif

@@ -48,8 +48,6 @@ void GameThreadFunctor::run()
 	//Show idle1 menu after threads are ready
 	state = new Idle(this);
 
-	std::cout << "GameThreadFunctor: PrintThread and CommThread ready" << std::endl;
-	
 	//Run event loop
 	for(;;){
 		unsigned long id;

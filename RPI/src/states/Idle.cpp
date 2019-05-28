@@ -9,6 +9,7 @@ Implementation of the Idle State's member functions
 Idle::Idle(GameThreadFunctor* gameTF){
 	this->gameTF = gameTF;
 	menuName_ = "idle1";
+
 	sendShowInd(gameTF->getPrintMq(), menuName_);
 }
 

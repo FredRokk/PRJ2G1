@@ -53,6 +53,10 @@ void PrintThreadFunctor::msgHandler(int id, osapi::Message* msg){
 		{
 			handleIdGameCleanMenuInd(static_cast<GameCleanMenuInd*>(msg));
 		} break;
+		case ID_GAME_CHANGE_MAP_IND:
+		{
+			handleIdGameChangeMapInd(static_cast<GameChangeMapInd*>(msg));
+		} break;
 		case ID_GAME_UPDATE_POINTS_IND:
 		{
 			handleIdGameUpdatePointsInd(static_cast<GameUpdatePointsInd*>(msg));
@@ -69,6 +73,14 @@ void PrintThreadFunctor::msgHandler(int id, osapi::Message* msg){
 		{
 			handleIdGameHighscoreChangeChar(static_cast<GameHighscoreChangeChar*>(msg));
 		} break;
+		case ID_GAME_UPDATE_CANON_ARMED_IND:
+		{
+			handleIdGameUpdateCanonArmedInd(static_cast<GameUpdateCanonArmedInd*>(msg));
+		} break;
+		case ID_GAME_NOTIFY_MISS_IND:
+		{
+			handleIdGameNotifyMissInd(static_cast<GameNotifyMissInd*>(msg));
+		} break;
 		default:
 		{
 
@@ -84,6 +96,10 @@ void PrintThreadFunctor::handleIdGameCleanMenuInd(GameCleanMenuInd* msg){
 	//Get menu string from msg and clean the menu corresponding to the string
 	std::cout << "Cleaning menu: " << msg->menu << std::endl;
 }
+void PrintThreadFunctor::handleIdGameChangeMapInd(GameChangeMapInd* msg){
+	//Get map int from msg and update selected map in MapSelect
+	std::cout << "Selected Map is: " << msg->map << std::endl;
+}
 void PrintThreadFunctor::handleIdGameUpdatePointsInd(GameUpdatePointsInd* msg){
 	//Get player int and points int and update the points of the player in all point-containing menus
 	std::cout << "Updating player " << msg->player << "'s points to " << msg->points << std::endl;
@@ -95,6 +111,19 @@ void PrintThreadFunctor::handleIdGameUpdateShotsInd(GameUpdateShotsInd* msg){
 void PrintThreadFunctor::handleIdGameSetNextPlayerInd(GameSetNextPlayerInd* msg){
 	//Get player int and update the next player to shoot in Versus menu
 	std::cout << "Setting next player to player " << msg->player << std::endl;
+}
+void PrintThreadFunctor::handleIdGameUpdateCanonArmedInd(GameUpdateCanonArmedInd* msg){
+	//Get armed bool and menu string from msg and update corresponding menu with armed bool
+	if (msg->armed){
+		std::cout << msg->menu << " - Canon is armed!" << std::endl;
+	} else {		
+		std::cout << msg->menu << " - Canon no longer armed!" << std::endl;
+	}
+}
+
+void PrintThreadFunctor::handleIdGameNotifyMissInd(GameNotifyMissInd* msg){
+	//Get menu string from msg and display miss for 3 seconds on corresponding menu
+	std::cout << " - You missed!" << std::endl;
 }
 void PrintThreadFunctor::handleIdGameHighscoreChangeChar(GameHighscoreChangeChar* msg){
 	//Get player int, charNum int and newChar char and update the charNum to newChar in corresponding player's highscore window
